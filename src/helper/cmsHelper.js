@@ -2,18 +2,16 @@
  * getIdBestsellCollection: homeData => best sell ref | null
  */
 export function getIdBestsellCollection(homeData) {
-  const items = homeData && homeData.sectionsCollection ? homeData.sectionsCollection.items : null;
-  // console.log('items', JSON.stringify(items));
-  if (!items) return null
+  if (!homeData && homeData.sectionsCollection && !homeData.sectionsCollection.items) return null
 
-  const bestAndGiftData = items
+  const bestAndGiftData = homeData.sectionsCollection.items
     .map((element) => element && element.sectionType === 'BestAndGift' &&
       element.bestAndGiftLetOrRightCollection.items
-    ).filter(i => i)[0]
+    ).filter(i => i)
 
-  if (!bestAndGiftData) return null
+  if (!bestAndGiftData[0]) return null
 
-  const idBestSell = bestAndGiftData.filter(i => i && i.idPrdMeilleureVente !== null)[0]
+  const idBestSell = bestAndGiftData[0].filter(i => i && i.idPrdMeilleureVente !== null)[0];
 
   return (idBestSell && idBestSell.idPrdMeilleureVente) || null;
   // => BestSell index (to rm switch case in BestAndGift.tsx?) => idBestSell, index(0:left, 1:right)
