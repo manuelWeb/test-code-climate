@@ -4,14 +4,12 @@
 export function getIdBestsellCollection(homeData) {
   const items = homeData && homeData.sectionsCollection ? homeData.sectionsCollection.items : null;
   // console.log('items', JSON.stringify(items));
-
   if (!items) return null
 
-  const bestAndGiftData = items.map((element) => {
-    if (element && element.sectionType === 'BestAndGift') {
-      return element.bestAndGiftLetOrRightCollection.items
-    }
-  }).filter(i => i)[0]
+  const bestAndGiftData = items
+    .map((element) => element && element.sectionType === 'BestAndGift' &&
+      element.bestAndGiftLetOrRightCollection.items
+    ).filter(i => i)[0]
 
   if (!bestAndGiftData) return null
 
