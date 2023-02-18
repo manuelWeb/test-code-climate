@@ -1,7 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
+import { data } from './Object'
+import { getIdBestsellCollection } from './helper/cmsHelper'
 
 function App() {
+  console.log('data?', data, 'filter data', getIdBestsellCollection(data));
   return (
     <div className="App">
       <header className="App-header">
@@ -15,7 +18,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Hello React
         </a>
       </header>
     </div>
